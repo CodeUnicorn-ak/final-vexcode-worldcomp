@@ -93,6 +93,18 @@ void velo(int velo) {
   Rintake.setVelocity(velo, pct);
 }
 void sleep(int time) { vex::task::sleep(time); }
+ void temp(){
+ 
+  Brain.Screen.printAt(2, 40 ,"Bottom Roller %f " , FRoller.temperature(percentUnits::pct));
+   Brain.Screen.printAt(2, 60 ,"Top Roller %f " , BRoller.temperature(percentUnits::pct));
+   Brain.Screen.printAt(2, 80 ,"LB  %f " , LB.temperature(percentUnits::pct));
+   Brain.Screen.printAt(2, 100 ,"LF  %f " , LF.temperature(percentUnits::pct));
+   Brain.Screen.printAt(2, 120 ,"RF  %f " , RF.temperature(percentUnits::pct));
+   Brain.Screen.printAt(2, 140 ,"RB  %f " , RB.temperature(percentUnits::pct));
+   Brain.Screen.printAt(2, 160 ,"Rintake %f " , Rintake.temperature(percentUnits::pct));
+   Brain.Screen.printAt(2, 180 ,"Lintake %f " , Lintake.temperature(percentUnits::pct));
+   
+}
 
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
@@ -319,7 +331,7 @@ void autonomous(void) {
   Rintake.spin(directionType::fwd);
   drive(30, -17);
   Drivetrain.setTurnVelocity(25, pct);
-  Drivetrain.turnFor(-41, degrees);
+  Drivetrain.turnFor(-40, degrees);
 
   FRoller.setVelocity(45, pct);
   BRoller.setVelocity(45, pct);
@@ -360,6 +372,80 @@ Rintake.stop();
   wait(2300, msec);
   rightDrive.stop();
   leftDrive.stop();
+
+
+//bop bop
+  Drivetrain.setTurnVelocity(70, pct);
+  Drivetrain.turnFor(142, degrees);
+
+Lintake.setVelocity(100, pct);
+  Rintake.setVelocity(100, pct);
+  Lintake.spin(directionType::rev);
+  Rintake.spin(directionType::rev);
+
+  rightDrive.setVelocity(100, pct);
+  leftDrive.setVelocity(100, pct);
+  rightDrive.spin(directionType::fwd);
+  leftDrive.spin(directionType::fwd);
+  wait(1500, msec);
+  rightDrive.stop();
+  leftDrive.stop();
+
+  rightDrive.setVelocity(15, pct);
+  leftDrive.setVelocity(15, pct);
+  rightDrive.spin(directionType::rev);
+  leftDrive.spin(directionType::rev);
+  wait(1500, msec);
+  rightDrive.stop();
+  leftDrive.stop();
+
+  rightDrive.setVelocity(100, pct);
+  leftDrive.setVelocity(100, pct);
+  rightDrive.spin(directionType::fwd);
+  leftDrive.spin(directionType::fwd);
+  wait(1500, msec);
+  rightDrive.stop();
+  leftDrive.stop();
+
+  rightDrive.setVelocity(15, pct);
+  leftDrive.setVelocity(15, pct);
+  rightDrive.spin(directionType::rev);
+  leftDrive.spin(directionType::rev);
+  wait(1500, msec);
+  rightDrive.stop();
+  leftDrive.stop();
+
+  rightDrive.setVelocity(100, pct);
+  leftDrive.setVelocity(100, pct);
+  rightDrive.spin(directionType::fwd);
+  leftDrive.spin(directionType::fwd);
+  wait(1500, msec);
+  rightDrive.stop();
+  leftDrive.stop();
+
+  rightDrive.setVelocity(15, pct);
+  leftDrive.setVelocity(15, pct);
+  rightDrive.spin(directionType::rev);
+  leftDrive.spin(directionType::rev);
+  wait(1500, msec);
+  rightDrive.stop();
+  leftDrive.stop();
+
+  rightDrive.setVelocity(100, pct);
+  leftDrive.setVelocity(100, pct);
+  rightDrive.spin(directionType::fwd);
+  leftDrive.spin(directionType::fwd);
+  wait(1500, msec);
+  rightDrive.stop();
+  leftDrive.stop();
+
+  rightDrive.setVelocity(15, pct);
+  leftDrive.setVelocity(15, pct);
+  rightDrive.spin(directionType::rev);
+  leftDrive.spin(directionType::rev);
+  wait(3000, msec);
+  rightDrive.stop();
+  leftDrive.stop();
 }
 
 /*---------------------------------------------------------------------------*/
@@ -373,24 +459,44 @@ Rintake.stop();
 /*---------------------------------------------------------------------------*/
 
 void usercontrol(void) {
-  // User control code here, inside the loop
+    //bool freeze2 = false;
   while (1) {
     conDeadZone();
-    /* Limit switch command
-    bool freeze;
-*/
+     temp();
+
 
     // Controller controls
-    while (Controller1.ButtonR1.pressing()) {
-      // freeze = true;
+    while (Controller1.ButtonY.pressing()) {
+      //freeze2 = true;
       Lintake.setVelocity(100, pct);
       Rintake.setVelocity(100, pct);
       Lintake.spin(directionType::fwd);
       Rintake.spin(directionType::fwd);
+    }
+    while (Controller1.ButtonR1.pressing()) {
+      //freeze2 = true;
+      Lintake.setVelocity(100, pct);
+      Rintake.setVelocity(100, pct);
+      FRoller.setVelocity(25, pct);
+
+      Lintake.spin(directionType::fwd);
+      Rintake.spin(directionType::fwd);
+      FRoller.spin(directionType::fwd);
+    
     }
 
-    while (Controller1.ButtonR2.pressing()) {
-      // freeze = true;
+   while (Controller1.ButtonUp.pressing()) {
+      //freeze2 = true;
+      Lintake.setVelocity(50, pct);
+      Rintake.setVelocity(50, pct);
+  
+      Lintake.spin(directionType::rev);
+      Rintake.spin(directionType::rev);
+    
+    }
+   
+   while (Controller1.ButtonR2.pressing()) {
+      //freeze2 = true;
       Lintake.setVelocity(100, pct);
       Rintake.setVelocity(100, pct);
       FRoller.setVelocity(100, pct);
@@ -400,15 +506,23 @@ void usercontrol(void) {
       FRoller.spin(directionType::fwd);
       BRoller.spin(directionType::fwd);
     }
-    while (Controller1.ButtonL1.pressing()) {
-      // freeze = false;
+     while (Controller1.ButtonL1.pressing()) {
+      //freeze = true;
       FRoller.setVelocity(100, pct);
       BRoller.setVelocity(100, pct);
       FRoller.spin(directionType::fwd);
       BRoller.spin(directionType::fwd);
     }
+    while (Controller1.ButtonDown.pressing()) {
+      //freeze = true;
+      FRoller.setVelocity(65, pct);
+      BRoller.setVelocity(65, pct);
+      FRoller.spin(directionType::fwd);
+      BRoller.spin(directionType::fwd);
+    }
+
     while (Controller1.ButtonL2.pressing()) {
-      // freeze = false;
+     // freeze2 = true;
       Lintake.setVelocity(100, pct);
       Rintake.setVelocity(100, pct);
       FRoller.setVelocity(100, pct);
@@ -418,14 +532,9 @@ void usercontrol(void) {
       FRoller.spin(directionType::fwd);
       BRoller.spin(directionType::rev);
     }
-    while (Controller1.ButtonB.pressing()) {
-      Lintake.stop(brakeType::hold);
-      Rintake.stop(brakeType::hold);
-      BRoller.stop(brakeType::hold);
-      FRoller.stop(brakeType::hold);
-    }
-    while (Controller1.ButtonX.pressing()) {
-      // freeze = false;
+
+   while (Controller1.ButtonX.pressing()) {
+      //freeze2 = true;
       Lintake.setVelocity(25, pct);
       Rintake.setVelocity(25, pct);
       FRoller.setVelocity(25, pct);
@@ -435,14 +544,35 @@ void usercontrol(void) {
       FRoller.spin(directionType::rev);
       BRoller.spin(directionType::rev);
     }
-    /* while (freeze * LimitSwitchA.pressing()) {
-         wait(130, msec);
-         BRoller.stop(brakeType::hold);
-         FRoller.stop(brakeType::hold);
-     }
+       while (Controller1.ButtonA.pressing()) {
+       //freeze2 = true;
+      Lintake.setVelocity(25, pct);
+      Rintake.setVelocity(25, pct);
+      FRoller.setVelocity(25, pct);
+      BRoller.setVelocity(25, pct);
+      Lintake.spin(directionType::rev);
+      Rintake.spin(directionType::rev);
+    }
+     while(Controller1.ButtonR1.pressing()){
+       //freeze = false;
+      Lintake.setVelocity(100, pct);
+      Rintake.setVelocity(100, pct);
+      FRoller.setVelocity(25, pct);
+    
+      Lintake.spin(directionType::fwd);
+      Rintake.spin(directionType::fwd);
+      FRoller.spin(directionType::fwd);
+    }
 
+    while(Controller1.ButtonB.pressing()){
+       //freeze = false;
+      Lintake.stop(brakeType::hold);
+      Rintake.stop(brakeType::hold);
+      BRoller.stop(brakeType::hold);
+      FRoller.stop(brakeType::hold);
+    }
 
-     */
+     
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
   }
